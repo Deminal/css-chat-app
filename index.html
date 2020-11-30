@@ -6,235 +6,372 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   
-  <title>Challenge In Progress (Grid Testimonials)</title>
+  <title>Frontend Mentor | [Challenge Name Here]</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+    html {
+      font-family:'Rubik', verdana, sans-serif;
+  --info: rgb(216, 158, 255); /*(sub-heading at the top of the app UI)*/
+  --received: rgb(146, 65, 200); /*(chat on the left)*/
+  --received-bg: rgba(110, 93, 126, .1); /*(chat on the left)*/
+  --placeholder-text: rgb(198, 202, 205); /*(placeholder text)*/
+  --heading: rgb(62, 39, 83); /*(main heading)*/
+  --body: rgb(163, 157, 170); /*(paragraph)*/
+
+  /* Gradient */
+  --gradient-magenta: rgb(233, 66, 255);
+  --gradient-violet: rgb(136, 56, 255);
+
+  --app-bg: rgb(245, 243, 247);  /*(app background)*/
+  --submit-button-bg: rgb(62, 39, 83); /*(submit button background)*/
+  --radio-button-outline: rgb(229, 112, 255); /*(radio button outline)*/
+    }
     *, *:after, *:before {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&display=swap');
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
 
-    body {
-      font-family: 'Barlow Semi Condensed', sans-serif;
-      font-size: .8rem;
-      --violet: hsl(263, 55%, 52%);
-      --grayblue: hsl(217, 19%, 35%);
-      --blackblue: hsl(219, 29%, 14%);
-      --lightgray: hsl(0, 0%, 81%);
-      --lightgrayblue: hsl(210, 46%, 95%);
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: var(--lightgrayblue);
+    .background {
+      height: 800px;
+      width: calc(20vw + 600px);
+      background: linear-gradient(to left bottom, var(--gradient-magenta), var(--gradient-violet));
+      border-radius: 0 0 40% 40%;
+      position: absolute;
+      left: -550px;
+      top: -200px;
     }
     main {
-      display: grid;
-      width: 90vw;
-      max-width: 1100px;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2.33rem;
-
-    }
-
-    .card {
-      display: grid;
-      padding: 1.33rem 2rem 2rem;
-      grid-template-rows: auto auto 1fr;
-      gap: 1.125rem;
-      border-radius: 15px;
-      color: var(--lightgrayblue);
-      box-shadow: 15px 15px 30px 0px var(--grayblue);
-    }
-
-    .card:nth-of-type(1), .card:nth-of-type(4) {
-      grid-column: span 2;
-    }
-
-    .card:nth-of-type(1) {
-      background: url(./images/bg-pattern-quotation.svg) top right 20% no-repeat;
-      background-color: var(--violet);
-      background-size: auto 16vh;
-    }
-
-    .card:nth-of-type(2) {
-      background-color: var(--grayblue);
-    }
-
-    .card:nth-of-type(4) {
-      background-color: var(--blackblue);
-    }
-
-    .card:last-of-type {
-      grid-column: 4;
-      grid-row: 1 / span 2;
-    }
-
-    .card:last-of-type .quote {
-      max-width: 27ch;
-    }
-
-    .card:nth-of-type(3), .card:last-of-type {
-      color: black;
-      background: white;
-      outline: red;
-
-    }
-    .card p + p {
-      /* margin-top: 1rem; */
-    }
-
-    .card .top {
       display: flex;
-      align-items: center;
-      gap: .66rem;
+      flex-flow: row wrap;
+      place-items: center;
+      min-height: 100vh;
+      padding: 10vh 7vw 7vh 7vw;
     }
 
-    .top img {
+    .phone {
+      flex: 0 0 297px;
+      position: relative;
+      width: 297px;
+      /* max-width: 375px; */
+      height: 546px;
+      display: flex;
+      flex-flow: column nowrap;
+      background-color: white;
+      padding: .66rem;
+      border-radius: 35px;
+      /* border: grey 2px solid; */
+      box-shadow: 10px 10px 50px 0px var(--body);
+    }
+
+    .phone::after{
+      position: absolute;
+      content: '';
+      width: 50%;
+      height: 5%;
+      top: 1%;
+      left: 25%;
+      background-color: white;
+      border-radius: 0 0 15px 15px;
+      z-index: 100;
+    }
+
+    .header {
+      height: auto;
+      display: flex;
+      align-items: flex-end;
+      padding: 2.125rem .66rem 1rem;
+      /* justify-items: end; */
+      background: linear-gradient(to right, var(--gradient-violet), var(--gradient-magenta));
+      border-radius: 25px 25px 5px 5px;
+    }
+
+    .header * {
+      margin-left: .33rem;
+    }
+
+    .back {
+      display: inline-block;  
+      position: relative;
+      top: -9px;
+      left: -3px;
+      padding: 6px;
+      /* margin-top: auto 0; */
+      /* margin-bottom: 6px; */
+      height: 12px;
+      width: 12px;
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    .back:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 23%;
+      width: 50%;
+      background: var(--info);
+      -webkit-transform: skew(0deg, 23deg);
+      -moz-transform: skew(0deg, 23deg);
+      -ms-transform: skew(0deg, 23deg);
+      -o-transform: skew(0deg, 23deg);
+      transform: skew(0deg, 23deg);
+    }
+    .back:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 23%;
+      width: 50%;
+      background: var(--info);
+      -webkit-transform: skew(0deg, -23deg);
+      -moz-transform: skew(0deg, -23deg);
+      -ms-transform: skew(0deg, -23deg);
+      -o-transform: skew(0deg, -23deg);
+      transform: skew(0deg, -23deg);
+    }
+
+    .header img {
+      /* display: block; */
+      width: 11%;
+      height: auto;
       border-radius: 50%;
-      border: 3px solid white;
+      border: 1.33px solid white;
     }
-    .card .title {
-      font-size: 1rem;
-    }
-    .card .quote {
-      opacity: .7;
-    }
-
-    .title span {
+    .header .info {
+      color: var(--info);
       font-size: .8rem;
-      opacity: .5;
+      margin-left: .125rem;
+      line-height: .77rem;
     }
 
-    .card .summary {
-      font-size: 1.25rem;
-      line-height: 1.125;
-      /* color: var(--lightgray); */
+    .header .name {
+      display: block;
+      /* font-size: .8rem; */
+      color: white;
+      font-weight: bold;
     }
 
-    .card .quote {
-      /* min-height: 4.6875rem; */
-      align-self: flex-end;
+    .header .status {
+      /* font-size: .66rem; */
     }
+
+    .body {
+      flex: 1 0 auto;
+      background: var(--app-bg);
+      border-radius: 0 0 25px 25px;
+      padding: 1rem .66rem;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      font-size: .7rem;
+    }
+
+    /* .body * + *{
+      margin-top: .66rem;
+    } */
+
+    .body img {
+      width: 27%;
+      height: auto;
+      border-radius: 21%;
+    }
+
+    .body p {
+      max-width: 69%;
+      line-height: 1.33;
+      padding: .5rem .33rem;
+      border-radius: 10px;
+    }
+
+    .body .received {
+      background: var(--received-bg);
+      color: var(--received);
+    }
+
+    .body .sent {
+      background: white;
+      color: var(--heading);
+      margin-left: auto;
+    }
+
+    .body .images {
+      background: none;
+      padding: .33rem 0 0;
+      max-width: 70%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .offer {
+      background: linear-gradient(to right, var(--gradient-magenta), var(--gradient-violet));
+      width: 75%;
+      padding: .33rem .66rem;
+      border-radius: 10px 10px 10px 5px;
+      border: 1px solid var(--radio-button-outline);
+      position: relative;
+    }
+
+    .ring {
+      display: inline-block;
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.4);
+    }
+
+    .offer span {
+      display: inline-block;
+      margin-left: .33rem;
+      font-size: .8rem;
+      color: var(--info);
+    }
+
+    .offer .price {
+      position: absolute;
+      right: .66rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    input {
+      /* margin-top: .66rem; */
+      /* padding: .33rem .66rem; */
+      border-radius: 30px;
+      outline: none;
+      border: none;
+    }
+
+    input::placeholder {
+      color: var(--placeholder-text);
+    }
+
+    .input-wrapper {
+      margin-top: .66rem;
+      padding: .66rem .66rem;
+      border-radius: 30px;
+      position: relative;
+      background: white;
+    }
+
+    .submit {
+      position: absolute;
+      top: 7px;
+      right: 5px;
+      content: '';
+      width: 23px;
+      height: 23px;
+      background-color: var(--submit-button-bg);
+      border-radius: 30px;
+      display: flex;
+      place-items: center;
+    }
+
+    .arrow {
+      height: 19px;
+      width: 19px;
+      background: white;
+      clip-path: polygon(60% 20%, 85% 50%, 60% 80%, 45% 79%, 70% 50%, 45% 20%);
+    }
+
+    .cta-wrapper {
+      flex: 1 1 auto;
+      /* margin-left: 3rem; */
+      display: flex;
+      place-content: center;
+    }
+
+    .cta {
+      margin-top: 9vh;
+      min-width: 27ch;
+      max-width: 43ch;
+    }
+    .cta h2 {
+      font-size: 2.125rem;
+      color: var(--heading);
+    }
+    .cta p {
+      color: var(--body);
+      margin-top: 3vh;
+      line-height: 1.6;
+    }
+
+    .attribution { width: 100%; margin-top: 3rem; font-size: .7rem; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
 <body>
+  <div class="background"></div>
   <main>
-    <div class="card">
-      <div class="top">
-      <img src="./images/image-daniel.jpg" alt="Profile picture of Daniel Clifford">
-      <p class="title">
-        Daniel Clifford
-        <br><span>Verified Graduate</span>
-      </p>
-    </div>
-      <p class="summary">
-        I received a job offer mid-course, and the subjects I learned were current, if not more so, 
-        in the company I joined. I honestly feel I got every penny’s worth.
-      </p>
-    
-      <p class="quote">
-        “ I was an EMT for many years before I joined the bootcamp. I’ve been looking to make a 
-        transition and have heard some people who had an amazing experience here. I signed up 
-        for the free intro course and found it incredibly fun! I enrolled shortly thereafter. 
-        The next 12 weeks was the best - and most grueling - time of my life. Since completing 
-        the course, I’ve successfully switched careers, working as a Software Engineer at a VR startup. ”
-      </p>
-    </div>
-  
-    <div class="card">
-      <div class="top">
-        <img src="./images/image-jonathan.jpg" alt="Profile picture of Jonathan Walters">
-        <p class="title">
-          Jonathan Walters
-          <br><span>Verified Graduate</span>
-        </p>
-      </div>
-    
-      <p class="summary">
-        The team was very supportive and kept me motivated
-      </p>
-
-      <p class="quote">
-        “ I started as a total newbie with virtually no coding skills. I now work as a mobile engineer 
-        for a big company. This was one of the best investments I’ve made in myself. ”
-      </p>
-    </div>
-  
-    <div class="card">
-      <div class="top">
-        <img src="./images/image-jeanette.jpg" alt="Profile picture of Jeanette Harmon">
-        <p class="title">
-         Jeanette Harmon
-          <br><span>Verified Graduate</span>
-        </p>
-      </div>
-    
-      <p class="summary">
-        An overall wonderful and rewarding experience
-      </p>
-
-      <p class="quote">
-        “ Thank you for the wonderful experience! I now have a job I really enjoy, and make a good living 
-        while doing something I love. ”
-      </p>
-    </div>
-  
-    <div class="card">
-      <div class="top">
-        <img src="./images/image-patrick.jpg" alt="Profile picture of Patrick Abrams">
-        <p class="title">
-          Patrick Abrams
-          <br><span>Verified Graduate</span>
-        </p>
-      </div>
-
-      <p class="summary">
-        Awesome teaching support from TAs who did the bootcamp themselves. Getting guidance from them and 
-        learning from their experiences was easy.
-      </p>
-    
-      <p class="quote">
-        “ The staff seem genuinely concerned about my progress which I find really refreshing. The program 
-        gave me the confidence necessary to be able to go out in the world and present myself as a capable 
-        junior developer. The standard is above the rest. You will get the personal attention you need from 
-        an incredible community of smart and amazing people. ”
-      </p>
-    </div>
-  
-    <div class="card">
-      <div class="top">
-        <img src="./images/image-kira.jpg" alt="Profile picture of Kira Whittle">
-        <p class="title">
-          Kira Whittle
-          <br><span>Verified Graduate</span>
-        </p>
+    <div class="phone">
+      <section class = "header">
+        <div class="back"></div>
+        <img src="./images/avatar.jpg" alt="Profile picture for Samuel Green">
+        <div class="info">
+          <span class="name">Samuel Green</span>
+          <span class="status">Available to Walk</span>
         </div>
-    
-      <p class="summary">
-        Such a life-changing experience. Highly recommended!
-      </p>
-
-      <p class="quote">
-        “ Before joining the bootcamp, I’ve never written a line of code. I needed some structure from 
-        professionals who can help me learn programming step by step. I was encouraged to enroll by a former 
-        student of theirs who can only say wonderful things about the program. The entire curriculum and staff 
-        did not disappoint. They were very hands-on and I never had to wait long for assistance. The agile team 
-        project, in particular, was outstanding. It took my learning to the next level in a way that no tutorial 
-        could ever have. In fact, I’ve often referred to it during interviews as an example of my developent 
-        experience. It certainly helped me land a job as a full-stack developer after receiving multiple offers. 
-        100% recommend! ”
-      </p>
+        <div class="menu"></div>
+      </section>
+      <section class = "body">
+        <p class="received">
+          That sounds great. I’d be happy with that.
+        </p>
+        <p class="received">
+          Could you send over some pictures of your dog, please?
+        </p>
+        <p class="sent images">
+          <img src="./images/dog-image-1.jpg" alt="Picture of golden retriever">
+          <img src="./images/dog-image-2.jpg" alt="Picture of golden retriever">
+          <img src="./images/dog-image-3.jpg" alt="Picture of golden retriever">
+        </p>
+        <p class="sent">
+          Here are a few pictures. She’s a happy girl!
+        </p>
+        <p class="sent">
+          Can you make it?
+        </p>
+        <p class="received">
+          She looks so happy! The time we discussed works. How long shall I take her out for?
+        </p>
+        <div class="offer">
+          <div class="ring"></div>
+          <span>30 minute walk</span>
+          <span class="price">$29</span>
+        </div>
+        <div class="offer">
+          <div class="ring"></div>
+          <span>1 hour walk</span>
+          <span class="price">$49</span>
+        </div>
+        <span class="input-wrapper">
+          <input type="text" placeholder="Type a message...">
+          <div class="submit">
+            <div class="arrow"></div>
+          </div>
+        </span>
+      </section>
+    </div><!--phone-->
+    <div class="cta-wrapper">
+      <section class = "cta">
+        <h2>Simple booking</h2>
+        <p>
+          Stay in touch with our dog walkers through the chat interface. This makes it easy to discuss arrangements and make bookings. Once the walk has been completed you can rate your walker and book again all through the chat.
+        </p>
+      </section>
+    </div>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Your Name Here</a>.
     </div>
   </main>
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
 </body>
 </html>
